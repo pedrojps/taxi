@@ -4,6 +4,7 @@ import com.example.car_request2.network.model.ConfirmRequest
 import com.example.car_request2.network.model.ConfirmResponse
 import com.example.car_request2.network.model.EstimateRequest
 import com.example.car_request2.network.model.EstimateResponse
+import com.example.car_request2.network.model.HistoryResponse
 import com.example.car_request2.network.remoteDataSourse.CarRemoteDataSource
 
 import io.reactivex.Single
@@ -39,6 +40,10 @@ class CarRepository private constructor() {
         return mRepositoriesCarRemoteDataSource.confirm(request)
     }
 
+    fun getHistory(customerId: String, driverId: Int?):
+            Single<Response<HistoryResponse>> {
+        return mRepositoriesCarRemoteDataSource.getHistory(customerId, driverId)
+    }
 }
 
 

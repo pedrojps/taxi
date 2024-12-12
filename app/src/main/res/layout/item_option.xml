@@ -2,46 +2,103 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_margin="8dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/tv_driver_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Driver Name"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="description"/>
+            <!-- Nome do Motorista -->
+            <TextView
+                android:id="@+id/tv_driver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="João da Silva"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/tv_vehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vehicle"/>
+            <!-- Descrição e Veículo -->
+            <TextView
+                android:id="@+id/tv_driver_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motorista com 3 anos de experiência"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="4dp" />
 
-        <TextView
-            android:id="@+id/tv_rating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rating"/>
+            <TextView
+                android:id="@+id/tv_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Veículo: Toyota Corolla - Preto"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/tv_fare"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fare"/>
+            <!-- Avaliação -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-        <Button
-            android:id="@+id/btn_choose_driver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.8 ★"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(250 avaliações)"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <!-- Valor e Botão -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="R$ 35,00"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@android:color/holo_green_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_choose_driver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:text="Escolher"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </layout>

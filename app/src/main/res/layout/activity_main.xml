@@ -7,42 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <EditText
-        android:id="@+id/et_user_id"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="User ID"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="32dp"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/et_origin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Origin"
-        android:inputType="text"
-        android:layout_marginHorizontal="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_user_id" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solicitar Viagem"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_destination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Destination"
-        android:layout_marginHorizontal="32dp"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/et_origin" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_user_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="ID do Usuário"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-    <Button
-        android:id="@+id/btn_estimate_fare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solicitar"
-        android:layout_marginBottom="32dp"
-        android:layout_marginHorizontal="32dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_origin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Endereço de Origem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_user_id">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_origin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_destination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Endereço de Destino"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_origin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_estimate_ride"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/black"
+            android:text="Estimar Valor"
+            android:textColor="@android:color/white"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_destination" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray_600"
+            android:text="Histórico de Viagens"
+            android:textColor="@android:color/white"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import com.example.car_request2.network.model.EstimateRequest
 import com.example.car_request2.network.model.EstimateResponse
 import com.example.car_request2.network.model.Option
 import com.example.car_request2.ui.Dialog
+import com.example.car_request2.ui.ScreenManager
 import com.example.car_request2.ui.option.adapter.AdapterOption
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -60,6 +61,9 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
         mBinding = ActivityOptionsBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         mapView = mBinding.mapView
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -77,19 +81,19 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
                 if (resource?.isSuccessful==true) {
                     callResponseSuccess(resource)
                 } else {
-                    callResponseError(resource!!)
+                    callResponseError(resource)
                 }
             }
         })
     }
 
     private fun callResponseSuccess(response: Response<ConfirmResponse>){
-        if (response.body() == null || response.body()?.success == true){
+        if (response.body() == null || response.body()?.success != true){
             Dialog.showRoundedErrorDialog(this,"Indisponivel", "No momento esta indispoiniveis para esse trajeto")
             return
         }
 
-        //ScreenManager.toGoOptionView(this, response.body(), mEstimateRequest)
+        ScreenManager.toGoHistoryView(this)
     }
 
     private fun callResponseError(response: Response<ConfirmResponse>?){
@@ -132,7 +136,6 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
         // Decodifique a polyline
         val encodedPolyline = mEstimateResponse?.routeResponse?.routes?.get(0)?.polyline?.encodedPolyline ?: return
         val decodedPath: List<LatLng> = PolyUtil.decode(encodedPolyline)
@@ -190,6 +193,11 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
 }

@@ -1,15 +1,14 @@
 package com.example.car_request2.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.Observable
 import androidx.lifecycle.ViewModelProvider
-import com.example.car_request2.ui.Dialog
 import com.example.car_request2.databinding.ActivityMainBinding
-import com.example.car_request2.network.model.ErrorResponse
 import com.example.car_request2.network.model.EstimateRequest
 import com.example.car_request2.network.model.EstimateResponse
+import com.example.car_request2.ui.Dialog
 import com.example.car_request2.ui.ScreenManager
 import retrofit2.Response
 
@@ -18,8 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
 
     private var mViewModel: MainViewModel? = null
-
-    var isButtonClickable = true
 
     private var mEstimateRequest: EstimateRequest? = null
 
@@ -40,12 +37,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListener(){
 
-        mBinding.btnEstimateFare.setOnClickListener {
+        mBinding.btnEstimateRide.setOnClickListener {
 
-            if (mBinding.btnEstimateFare.isEnabled) {
-                mBinding.btnEstimateFare.isEnabled = false
+            if (mBinding.btnEstimateRide.isEnabled) {
+                mBinding.btnEstimateRide.isEnabled = false
                 onClick()
             }
+        }
+
+        mBinding.btnHistory.setOnClickListener {
+            ScreenManager.toGoHistoryView(this)
         }
 
         mViewModel?.mResponse?.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     private fun callResponseError(response: Response<EstimateResponse>?){
         var ErrorResponse = mViewModel?.decodifcError(response)
         Dialog.showRoundedErrorDialog(this, "Erro", ErrorResponse?.errorDescription ?: "-")
-        mBinding.btnEstimateFare.isEnabled = true
+        mBinding.btnEstimateRide.isEnabled = true
     }
 
     private fun onClick(){

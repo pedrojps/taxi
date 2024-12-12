@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!--trocar pelo mapa-->
+    <!-- Mapa Estático -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/iv_map"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:background="@color/material_grey_300"
         android:contentDescription="Mapa estático"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/map_view"
@@ -25,9 +25,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Lista de Motoristas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_drivers"
         android:layout_width="0dp"
@@ -36,7 +36,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

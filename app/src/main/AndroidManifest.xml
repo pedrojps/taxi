@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Car_request2"
+        android:theme="@style/Theme.Material3.DayNight"
         tools:targetApi="31">
 
         <meta-data
@@ -24,6 +24,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +34,11 @@
         </activity>
 
         <activity android:name=".ui.option.OptionActivity"
+            android:label="Opções de Viagem"
+            android:exported="true"/>
+
+        <activity android:name=".ui.history.HistoryActivity"
+            android:label="Histórico de Viagens"
             android:exported="true"/>
     </application>
 

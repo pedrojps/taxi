@@ -17,5 +17,5 @@ interface TaxiService {
     fun getHistory(
         @Path("customer_id") customerId: String,
         @Query("driver_id") driverId: Int?
-    ): Call<HistoryResponse>
+    ): Single<Response<HistoryResponse>>
 }

@@ -9,15 +9,12 @@ class OptionViewHolder (val binding: ItemOptionBinding) : RecyclerView.ViewHolde
     fun bind(model: Option?, onClick: ((Option) -> Unit)?) {
 
         binding.apply {
-            this.tvDriverName.text = model?.name
-
-            this.tvDescription.text = model?.description
-
-            this.tvVehicle.text = model?.vehicle
-
-            this.tvRating.text = model?.review?.rating.toString()
-
-            this.tvFare.text = model?.value.toString()
+            tvDriverName.text = model?.name
+            tvDriverDescription.text = model?.description
+            tvVehicle.text = "Veículo: ${model?.vehicle}"
+            tvRating.text = "${model?.review?.rating} ★"
+            tvReviews.text = "(${model?.review?.comment})"
+            tvValue.text = "R$ ${model?.value}"
 
             this.btnChooseDriver.setOnClickListener {
                 model?.apply {

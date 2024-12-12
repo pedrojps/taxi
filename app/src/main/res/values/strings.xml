@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Car_request2</string>
+
+    <string-array name="spinner_items">
+        <item>Todos</item>
+        <item>Homer Simpson</item>
+        <item>Dominic Toretto</item>
+        <item>James Bond</item>
+    </string-array>
+
 </resources>
