@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.Observable
 import androidx.lifecycle.ViewModelProvider
+import com.example.car_request2.R
 import com.example.car_request2.databinding.ActivityMainBinding
 import com.example.car_request2.network.model.EstimateRequest
 import com.example.car_request2.network.model.EstimateResponse
@@ -59,13 +60,14 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     callResponseError(resource)
                 }
+                mBinding.btnEstimateRide.isEnabled = true
             }
         })
     }
 
     private fun callResponseSuccess(response: Response<EstimateResponse>){
         if (response.body() == null || response.body()?.options.isNullOrEmpty()){
-            Dialog.showRoundedErrorDialog(this,"Indisponivel", "No momento não há motoristas dispoiniveis para esse trajeto")
+            Dialog.showRoundedErrorDialog(this,getString(R.string.indisponivel_title),getString(R.string.indisponivel_description))
             return
         }
         ScreenManager.toGoOptionView(this, response.body(), mEstimateRequest)
@@ -73,8 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun callResponseError(response: Response<EstimateResponse>?){
         var ErrorResponse = mViewModel?.decodifcError(response)
-        Dialog.showRoundedErrorDialog(this, "Erro", ErrorResponse?.errorDescription ?: "-")
-        mBinding.btnEstimateRide.isEnabled = true
+        Dialog.showRoundedErrorDialog(this, getString(R.string.error_title), ErrorResponse?.errorDescription ?: "-")
     }
 
     private fun onClick(){

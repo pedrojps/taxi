@@ -38,7 +38,7 @@
             android:exported="true"/>
 
         <activity android:name=".ui.history.HistoryActivity"
-            android:label="Histórico de Viagens"
+            android:label="@string/historico_viagens"
             android:exported="true"/>
     </application>
 

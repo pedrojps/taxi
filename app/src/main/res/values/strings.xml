@@ -8,4 +8,27 @@
         <item>James Bond</item>
     </string-array>
 
+
+    <string name="format_datetime">%1$td/%1$tm/%1$tY as %1$tH:%1$tM</string>
+    <string name="de">De: %s</string>
+    <string name="para">Para: %s</string>
+    <string name="distance_by_time">"Distância: %.2f km, Tempo: %s"</string>
+    <string name="value">R$ %.2f</string>
+    <string name="veiculo">Veículo: %s</string>
+
+    <string name="error_title">Erro</string>
+    <string name="error_description">%s</string>
+    <string name="indisponivel_title">Indisponivel</string>
+    <string name="indisponivel_description">No momento esta indispoiniveis para esse trajeto</string>
+    <string name="label_id_usuario">ID do Usuário</string>
+    <string name="filter">Filter</string>
+    <string name="solicitar_viagem">Solicitar Viagem</string>
+    <string name="origem">Endereço de Origem</string>
+    <string name="destino">Endereço de Destino</string>
+    <string name="estimar_valor">Estimar Valor</string>
+    <string name="historico_viagens">Histórico de Viagens</string>
+    <string name="fechar">Fechar</string>
+    <string name="escolher">Escolher</string>
+    <string name="mapa_estatico">Mapa Estático</string>
+
 </resources>

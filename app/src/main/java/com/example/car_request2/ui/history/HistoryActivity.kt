@@ -24,7 +24,7 @@ class HistoryActivity: AppCompatActivity() {
 
     private var mViewModel: HistoryViewModel? = null
 
-    private var mDriveId : Int? = null
+    private var mDriveId : Int? = 0
 
     private var mAdapter: AdapterHistory? = null
 
@@ -77,7 +77,7 @@ class HistoryActivity: AppCompatActivity() {
 
             if (mBinding.btnFilter.isEnabled) {
                 mBinding.btnFilter.isEnabled = false
-
+                mBinding.showLoader.isVisible = true
                 mViewModel?.getHistory(mBinding.etUserId.text.toString(), mDriveId)
             }
         }
@@ -100,7 +100,7 @@ class HistoryActivity: AppCompatActivity() {
 
     private fun callResponseSuccess(response: Response<HistoryResponse>){
         if (response.body() == null || response.body()?.rides.isNullOrEmpty()){
-            Dialog.showRoundedErrorDialog(this,"Indisponivel", "No momento não há historico")
+            Dialog.showRoundedErrorDialog(this,getString(R.string.indisponivel_title),getString(R.string.indisponivel_description))
             return
         }
         setListAdapter(response.body()?.rides)
@@ -108,7 +108,7 @@ class HistoryActivity: AppCompatActivity() {
 
     private fun callResponseError(response: Response<HistoryResponse>?){
         var ErrorResponse = mViewModel?.decodifcError(response)
-        Dialog.showRoundedErrorDialog(this, "Erro", ErrorResponse?.errorDescription ?: "-")
+        Dialog.showRoundedErrorDialog(this, getString(R.string.error_title), ErrorResponse?.errorDescription ?: "-")
     }
 
     fun configAdapter() {

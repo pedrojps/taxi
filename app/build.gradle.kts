@@ -64,5 +64,6 @@ dependencies {
     // Maps
     implementation(libs.googlemaps)
     implementation(libs.mapsutil)
+    implementation(libs.glide)
 
 }

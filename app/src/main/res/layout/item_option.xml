@@ -20,7 +20,7 @@
                 android:id="@+id/tv_driver_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="João da Silva"
+                tools:text="João da Silva"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@android:color/black"
                 android:layout_marginBottom="8dp" />
@@ -30,7 +30,7 @@
                 android:id="@+id/tv_driver_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motorista com 3 anos de experiência"
+                tools:text="Motorista com 3 anos de experiência"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginBottom="4dp" />
@@ -39,7 +39,7 @@
                 android:id="@+id/tv_vehicle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Veículo: Toyota Corolla - Preto"
+                tools:text="Veículo: Toyota Corolla - Preto"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginBottom="8dp" />
@@ -55,7 +55,7 @@
                     android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.8 ★"
+                    tools:text="4.8 ★"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="@android:color/holo_orange_dark"
                     android:layout_marginEnd="8dp" />
@@ -64,7 +64,7 @@
                     android:id="@+id/tv_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(250 avaliações)"
+                    tools:text="(250 avaliações)"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="@android:color/darker_gray" />
             </LinearLayout>
@@ -79,8 +79,7 @@
                     android:id="@+id/tv_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="R$ 35,00"
+                    tools:text="R$ 35,00"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@android:color/holo_green_dark"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,9 +89,8 @@
                     android:id="@+id/btn_choose_driver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:backgroundTint="@android:color/holo_blue_dark"
-                    android:text="Escolher"
+                    android:text="@string/escolher"
                     android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

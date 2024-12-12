@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.Observable
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.car_request2.R
 import com.example.car_request2.databinding.ActivityOptionsBinding
 import com.example.car_request2.network.model.ConfirmRequest
 import com.example.car_request2.network.model.ConfirmResponse
@@ -17,6 +19,7 @@ import com.example.car_request2.network.model.EstimateRequest
 import com.example.car_request2.network.model.EstimateResponse
 import com.example.car_request2.network.model.Option
 import com.example.car_request2.ui.Dialog
+import com.example.car_request2.ui.DriveDistance
 import com.example.car_request2.ui.ScreenManager
 import com.example.car_request2.ui.option.adapter.AdapterOption
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,10 +33,7 @@ import com.google.maps.android.PolyUtil
 import retrofit2.Response
 
 
-class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
-
-    private lateinit var mapView: MapView
-    private lateinit var googleMap: GoogleMap
+class OptionActivity  : AppCompatActivity() {
 
     companion object {
         const val PARAM_OPTION_RESPONSE = "PARAM_OPTION_RESPONSE"
@@ -64,10 +64,6 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        mapView = mBinding.mapView
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
-
         getParam()
         setl()
     }
@@ -89,16 +85,20 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
 
     private fun callResponseSuccess(response: Response<ConfirmResponse>){
         if (response.body() == null || response.body()?.success != true){
-            Dialog.showRoundedErrorDialog(this,"Indisponivel", "No momento esta indispoiniveis para esse trajeto")
+            successError()
             return
         }
 
         ScreenManager.toGoHistoryView(this)
     }
 
+    private fun successError(){
+        Dialog.showRoundedErrorDialog(this,getString(R.string.indisponivel_title),getString(R.string.indisponivel_description))
+    }
+
     private fun callResponseError(response: Response<ConfirmResponse>?){
         var ErrorResponse = mViewModel?.decodifcError(response)
-        Dialog.showRoundedErrorDialog(this, "Erro", ErrorResponse?.errorDescription ?: "-")
+        Dialog.showRoundedErrorDialog(this, getString(R.string.error_title), ErrorResponse?.errorDescription ?: "-")
     }
 
     private fun getParam(){
@@ -117,6 +117,7 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
             }
 
         setOptionSearch(mEstimateResponse?.options)
+        onMapReady()
     }
 
     private fun setOptionSearch(data: List<Option?>?) {
@@ -134,25 +135,28 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
         }
     }
 
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
+    fun onMapReady() {
         // Decodifique a polyline
         val encodedPolyline = mEstimateResponse?.routeResponse?.routes?.get(0)?.polyline?.encodedPolyline ?: return
         val decodedPath: List<LatLng> = PolyUtil.decode(encodedPolyline)
 
-        // Adicione a polyline no mapa
-        googleMap.addPolyline(
-            PolylineOptions()
-                .addAll(decodedPath)
-                .width(10f)
-                .color(Color.BLUE)
-        )
+        // Construir a URL
+        val apiKey = "AIzaSyAJWCDfk_ftFIxuIqtz53BsBmqlblnbaik"
+        val staticMapUrl = mViewModel?.buildStaticMapUrlWithPolygon(apiKey, points = decodedPath)
 
-        // Centralize o mapa
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(decodedPath[0], 12f))
+        // Carregar o mapa no ImageView
+        Glide.with(this)
+            .load(staticMapUrl)
+            .into(mBinding.imageView)
     }
 
     private fun onClick(op: Option){
+        val distanceKm = (mEstimateResponse?.distance ?: 0.0)/1000
+        if (!DriveDistance.distanceByPermision(op.id, distanceKm)){
+            successError()
+            return
+        }
+
         if (isListClickable) {
             mBinding.showLoader.isVisible = true
             isListClickable = false
@@ -173,26 +177,6 @@ class OptionActivity  : AppCompatActivity() , OnMapReadyCallback {
             )
             mBinding.rvDrivers.postDelayed({ isListClickable = true }, 1000) // Reativa após 1 segundo
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView.onLowMemory()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -34,6 +34,8 @@ rxjava = { group = "io.reactivex.rxjava2", name = "rxjava", version = "2.2.9" }
 # Maps
 googlemaps = {group = 'com.google.android.gms' , name = 'play-services-maps', version = '18.0.2'}
 mapsutil = {group = 'com.google.maps.android' , name = 'android-maps-utils', version = '2.3.0'}
+glide = {group = 'com.github.bumptech.glide', name = 'glide', version = '4.15.1'}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

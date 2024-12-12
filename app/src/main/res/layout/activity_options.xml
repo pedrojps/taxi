@@ -12,16 +12,17 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:background="@color/material_grey_300"
-        android:contentDescription="Mapa estático"
+        android:contentDescription="@string/mapa_estatico"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map_view"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/mapa_estatico"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
